@@ -1,3 +1,5 @@
+package java_class;
+
 public class RestaurantMenuItem {
     private String NewMenuItemName;
     private String Description;
