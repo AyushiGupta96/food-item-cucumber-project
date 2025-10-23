@@ -16,8 +16,9 @@ import java.awt.*;
 public class MenuManagementSteps {
     RestaurantMenuItem NewMenuItem;
     RestaurantMenu LocationMenu = new RestaurantMenu();
-    @Given("I have a menu item with name {string} and price {int}")
-    public void i_have_a_menu_item_with_name_and_price(String NewMenuItemName, Integer price) {
+    @Given("^I have a menu item with name \"([^\"]+)\" and price ([$]*)(\\d+)$")
+    // ^ represent begining and $ represent end.
+    public void i_have_a_menu_item_with_name_and_price(String NewMenuItemName, String currency,Integer price) {
 
         NewMenuItem = new  RestaurantMenuItem(NewMenuItemName,Description:"",price);
         // Write code here that turns the phrase above into concrete actions
