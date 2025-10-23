@@ -12,7 +12,7 @@ import static io.cucumber.core.options.Constants.PLUGIN_PROPERTY_NAME;
 @SelectPackages("test")
 @ConfigurationParameter(key= PLUGIN_PROPERTY_NAME,value="pretty")
 @ConfigurationParameter(key= GLUE_PROPERTY_NAME,value="test")
-@CofigurationParameter(Key= Constants.FILTER_TAGS_PROPERTY_NAME,value="@SmokeTest and @RegularTest")
+@ConfigurationParameter(Key= Constants.FILTER_TAGS_PROPERTY_NAME,value="@SmokeTest and @RegularTest")
 //@IncludeTags("SmokeTags | NightTest")
 //@IncludeTags("!NightTest") or @IncludeTags("SmokeTags & NightTest")
 public class RunCucumberTest {

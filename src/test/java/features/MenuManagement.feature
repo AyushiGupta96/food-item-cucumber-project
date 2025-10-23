@@ -1,4 +1,8 @@
 Feature: menu management
+  Background: Add another menu
+    Given I have a menu item with name "Cucumber " and price $10
+    When I add that menu item
+    Then Menu Item with name "Cucumber "  should be added
   @SmokeTest
   Scenario: add  a menu item
 
