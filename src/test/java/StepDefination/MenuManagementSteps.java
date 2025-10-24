@@ -6,6 +6,7 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.en.*;
 import java_class.RestaurantMenu;
 import java_class.RestaurantMenuItem;
+import java_class.LocationMenu;
 import org.junit.*;
 
 import java.awt.*;
@@ -50,7 +51,7 @@ public class MenuManagementSteps {
     public void i_should_get_error_test(String string) {
         // Write code here that turns the phrase above into concrete actions
         boolean ItemExists = LocationMenu.does_item_exit(NewMenuItem);
-        assertThat(ErrMsg).isEqualTo(expected:"duplicate item");
+        assertThat(ErrMsg).isEqualTo(expected+"duplicate item");
         //throw new io.cucumber.java.PendingException();
     }
 }

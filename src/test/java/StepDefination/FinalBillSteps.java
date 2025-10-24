@@ -3,6 +3,9 @@ package StepDefination;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import java_class.BillCalculationHelper;
+import org.openqa.selenium.*;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 
 import static org.junit.Assert.assertThat;
 //import static org.assertj.core.api.Assertions.assertThat;
@@ -37,14 +40,21 @@ public class FinalBillSteps {
     }
 
     @Then("Final bill amount calculated is {double}")
-    public void final_bill_amount_calculated_is(Double expectedvalue) {
+    public void final_bill_amount_calculated_is(Double expectedvalue) {// values mentioned in feature file is expectedvalue
         // Write code here that turns the phrase above into concrete actions
         double SysCalVal =  BillCalculationHelper.CalculateBillForCustomer(this.InitialBillamount,this.TaxRate);
         System.out.println("expectedvalue"+expectedvalue);
-        System.out.println("SysCalVal"+SysCalVal);
+        System.out.println("SysCalVal"+SysCalVal);// is the value calculated in calculation helper class
         assertThat(expectedvalue).isEqualTo(SysCalVal);
+        invokeWebPage(expectedvalue);//calling the method
         throw new io.cucumber.java.PendingException();
     }
+    private  void invokeWebPage(double expectedvalueWebPage){ // passing the value of expected to webpage
+        EdgeOptions options= new EdgeOptions();
+        options.addArguments("--no sandbox--");
+        WebDriver driver = new EdgeDriver(options);
+        driver.get("http://127.0.0.1:8000");// it will direct to the following link . Here i have mentioned portnumber as it is rummimg in local server but we can mention website link also if we are testing a website
+}
     /**@Given("I have a customer")
     public void i_have_a_customer() {
         // Write code here that turns the phrase above into concrete actions
