@@ -53,7 +53,14 @@ public class FinalBillSteps {
         EdgeOptions options= new EdgeOptions();
         options.addArguments("--no sandbox--");
         WebDriver driver = new EdgeDriver(options);
-        driver.get("http://127.0.0.1:8000");// it will direct to the following link . Here i have mentioned portnumber as it is rummimg in local server but we can mention website link also if we are testing a website
+        driver.get("http://127.0.0.1:8000");
+        // it will direct to the following link . Here i have mentioned portnumber as it is rummimg in local server but we can mention website link also if we are testing a website
+        WebElement Billamounttxt= driver.findElement(By.id("id_billamount"));
+        WebElement TaxRatetxt = driver.findElement(By.id("id_taxrate"));
+        WebElement CalculateButton = driver.findElement(By.id("mybutton"));
+        Billamounttxt.sendKeys(Integer.toString(this.InitialBillamount));
+        TaxRatetxt.sendKeys(Double.toString(this.TaxRate));
+        CalculateButton.click();
 }
     /**@Given("I have a customer")
     public void i_have_a_customer() {
