@@ -15,7 +15,7 @@ Feature: menu management
 
     Given I have a menu item with name "Cucumber salad" and price $10
     When I add that menu item
-    Then Menu Item with name "Cucumber salad"  should be added
+    Then i should get error test "duplicate item"
 
   @nightTest @RegularTest
   Scenario: add  a menu item

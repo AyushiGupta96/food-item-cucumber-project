@@ -10,12 +10,15 @@ import org.junit.*;
 
 import java.awt.*;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+
 //import static com.sun.beans.introspect.PropertyInfo.Name.description;
 
 
 public class MenuManagementSteps {
     RestaurantMenuItem NewMenuItem;
     RestaurantMenu LocationMenu = new RestaurantMenu();
+    String ErrMsg;
     @Given("^I have a menu item with name \"([^\"]+)\" and price ([$]*)(\\d+)$")
     // ^ represent begining and $ represent end.
     public void i_have_a_menu_item_with_name_and_price(String NewMenuItemName, String currency,Integer price) {
@@ -28,17 +31,23 @@ public class MenuManagementSteps {
     @When("I add that menu item")
     public void i_add_that_menu_item() {
         RestaurantMenu LocationMenu;
-        LocationMenu.add(NewMenuItem);
+        //LocationMenu.add(NewMenuItem);
+        try{
+            LocationMenu.add(NewMenuItem);
+        }
+        catch(IllegalArgumentException ex) {
+            ErrMsg = ex.getMessage();
+        }
         assertThatNoException();
         // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
     }
 
-    @Then("Menu Item with name {string}  should be added")
-    public void menu_Item_with_name_should_be_added(String string) {
+    @Then("i should get error test {String})
+    public void i_should_get_error_test(String string) {
         // Write code here that turns the phrase above into concrete actions
         boolean ItemExists = LocationMenu.does_item_exit(NewMenuItem);
-        assertThat(ItemExists).isEqualTo(expected:true);
+        assertThat(ErrMsg).isEqualTo(expected:"duplicate item");
         //throw new io.cucumber.java.PendingException();
     }
 }
