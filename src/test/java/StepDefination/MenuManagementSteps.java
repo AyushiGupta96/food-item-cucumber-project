@@ -19,6 +19,9 @@ public class MenuManagementSteps {
     RestaurantMenuItem NewMenuItem;
     RestaurantMenu LocationMenu = new RestaurantMenu();
     String ErrMsg;
+    public MenuManagementSteps(){
+        System.out.println("custructor called");
+    }
     @Given("^I have a menu item with name \"([^\"]+)\" and price ([$]*)(\\d+)$")
     // ^ represent begining and $ represent end.
     public void i_have_a_menu_item_with_name_and_price(String NewMenuItemName, String currency,Integer price) {
