@@ -46,10 +46,11 @@ public class FinalBillSteps {
         System.out.println("expectedvalue"+expectedvalue);
         System.out.println("SysCalVal"+SysCalVal);// is the value calculated in calculation helper class
         assertThat(expectedvalue).isEqualTo(SysCalVal);
-        invokeWebPage(expectedvalue);//calling the method
+        String WebPageResponse = invokeWebPage(expectedvalue);//calling the method
+        assert(WebPageResponse.contains("final bill amount is $"+ expectedvalue));
         throw new io.cucumber.java.PendingException();
     }
-    private  void invokeWebPage(double expectedvalueWebPage){ // passing the value of expected to webpage
+    private  String invokeWebPage(double expectedvalueWebPage){ // passing the value of expected to webpage
         EdgeOptions options= new EdgeOptions();
         options.addArguments("--no sandbox--");
         WebDriver driver = new EdgeDriver(options);
@@ -61,6 +62,12 @@ public class FinalBillSteps {
         Billamounttxt.sendKeys(Integer.toString(this.InitialBillamount));
         TaxRatetxt.sendKeys(Double.toString(this.TaxRate));
         CalculateButton.click();
+        //extracting calculated bill amount from webpage and checking the result
+        WebElement Header3Element = driver.findElement(By.xpath("//h3"));
+        String response = Header3Element.getText();// all this value is compared with line 50 : assert(WebPageResponse.contains("final bill amount is $"+ expectedvalue));
+        //System.out.println(Header3Element.getText().contains("fimal bill amount is"+expectedvalueWebPage));
+        driver.quit();
+        return response;
 }
     /**@Given("I have a customer")
     public void i_have_a_customer() {
